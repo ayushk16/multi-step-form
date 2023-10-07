@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
     <link rel="stylesheet" href="root.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="step2.css">
     <title>Multi-step-form</title>
 </head>
 
@@ -65,48 +66,7 @@
         </aside>
 
         <main class="form-area" id="form-area">
-            <div class="form-container">
-                <header class="form-header">
-                    <h1 class="main-form-heading">
-                        Personal info
-                    </h1>
-                    <p class="form-parah">
-                        Please provide your name, email address, and phone number.
-                    </p>
-                </header>
 
-                <form class="form">
-                    <div class="form-fields">
-                        <div class="different-info">
-                            <label class="label" for="name">Name</label>
-                            <input type="text" id="user-name" class="input" id="name" name="name"
-                                placeholder="e.g. Stephen King" required>
-
-                        </div>
-                        <div class="different-info">
-                            <label class="label" for="email">Email Address</label>
-                            <input type="email" id="user-email" class="input" name="email" id="email"
-                                placeholder="e.g. stephenking@lorem.com" required>
-
-                        </div>
-                        <div class="different-info">
-                            <label class="label" for="phone">Phone Number</label>
-                            <input type="text" id="user-phone" class="input" name="phone" id="phone"
-                                placeholder="e.g. +1 234 567 890" phone>
-                        </div>
-                        <div>
-                            <button type="submit" id="submit" style="display: none;">submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="btn-holder">
-                <div class="internal-btn-holder">
-                    <button class="next-step-btn" id="next-btn">
-                        Next Step
-                    </button>
-                </div>
-            </div>
         </main>
     </div>
     <script src="./script.js"></script>

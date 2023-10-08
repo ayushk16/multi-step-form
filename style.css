@@ -189,6 +189,14 @@ input[type=number] {
     margin-top: 50px;
 }
 
+.internal-btn-holder{
+    width: 540px;
+    max-width: 540px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .next-step-btn{
     background-color: var(--Marine-blue);
     color: var(--Alabaster);
@@ -282,8 +290,5 @@ input[type=number] {
     .internal-btn-holder{
         width: 540px;
         max-width: 540px;
-        display: flex;
-        justify-content: flex-end;
-
     }
 }

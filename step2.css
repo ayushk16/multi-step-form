@@ -20,10 +20,12 @@
 
 .add-border-plan-card{
     border-color:var(--Purplish-blue);
+    background-color: var(--Magnolia);
 }
 
 .plan-card:hover{
     border-color: var(--Purplish-blue);
+    cursor: pointer;
 }
 
 .plan-img-container{
@@ -56,6 +58,7 @@
     margin-top: 3rem;
     display: flex;
     justify-content: center;
+    background-color: var(--Magnolia);
 }
 
 
@@ -116,14 +119,27 @@
   input:checked + .slider:before {
     transform: translateX(2rem);
   }
+  input[type="radio"] {
+    visibility: hidden;
+  }
 
-  @media (max-width: 850px) {
+  .goback-btn{
+    color: var(--Cool-gray);
+  }
+  .goback-btn:hover{
+    color: var(--Marine-blue);
+    cursor: pointer;
+  }
+
+
+  @media (max-width: 1150px) {
     
 
     .plan-select-field{
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
+        margin-top: -10px;
         /* gap: 1rem; */
     
     }

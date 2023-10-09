@@ -29,6 +29,7 @@ Users should be able to:
   - A field has been missed
   - The email address is not formatted correctly
   - A step is submitted, but no selection has been made
+- Add prices of plans and addons dynamicaly.
 
 ### Screenshot
 

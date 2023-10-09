@@ -73,7 +73,8 @@
     font-size: 0.8rem;
     font-weight: 400;
     color: var(--Marine-blue);
-    display: none;
+    /* display: none; */
+    visibility: hidden;
     margin-top: 5px;
 }
 

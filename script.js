@@ -54,6 +54,27 @@ let masterObject = {
 
 }
 
+function clearError() {
+    let errorAlert = Array.from(document.getElementsByClassName('error-step1'));
+    errorAlert.forEach((element, i) => {
+        element.style.display = "none";
+        element.parentElement.nextElementSibling.style.borderColor = Lightgray;
+
+    });
+}
+
+function showError(index) {
+    let errorAlert = Array.from(document.getElementsByClassName('error-step1'));
+    errorAlert.forEach((element, i) => {
+        if (i == index - 1) {
+
+            element.style.display = "block";
+            element.parentElement.nextElementSibling.style.borderColor = Strawberryred;
+        }
+    });
+}
+
+
 function highlightStep(index) {
     let listOfNumber = Array.from(document.getElementsByClassName('list-number'));
 
@@ -103,23 +124,30 @@ function validateStep1(nameField, emailField, phoneField) {
     const email = emailField.value;
     const phone = phoneField.value;
     // regex patter for validation
-    let emailpattern = /^[^ ]+@[^ ]+.[a-z]{2,3}$/;
-    let phonepattern = /\b(?:\+?\d{1,3}[-. ]?)?\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}\b/;
+    let emailpattern = /^[^ ]+@[^ ]+.+[a-z]{2,3}$/;
+    let phonepattern = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+    // let phonepattern = /\b(?:\+?\d{1,3}[-. ]?)?\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}\b/;
     // let phonepattern = /\+\d{1}\s\d{3}\s\d{3}\s\d{3}/
     // let phonepattern = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
     // let phonepattern = /+\d{1,3}\d{3}\d{3}\d{3}$/;
     if (name == "") {
         nameField.focus();
+        clearError();
+        showError(1);
     }
     else {
         if (!email.match(emailpattern)) {
             console.log("err-email");
             emailField.focus();
+            clearError();
+            showError(2);
         }
         else {
             if (!phone.match(phonepattern) && phone.length < 6) {
                 console.log("error-phone");
                 phoneField.focus();
+                clearError();
+                showError(3);
             }
             else {
                 console.log("go ahead");
@@ -127,6 +155,7 @@ function validateStep1(nameField, emailField, phoneField) {
                 masterObject.userName = name;
                 masterObject.userEmail = email;
                 masterObject.userNumber = phone;
+                clearError();
                 step2();
             }
         }
@@ -143,6 +172,10 @@ function validation() {
 }
 
 function planMonthly() {
+    // change css
+    document.getElementsByClassName('monthly')[0].classList.add('slided');
+    document.getElementsByClassName('yearly')[0].classList.remove('slided');
+
     // changing master Object planDuration according slider
     masterObject.planDuration = "monthly";
 
@@ -165,7 +198,7 @@ function planMonthly() {
     const yearlyOffer = Array.from(document.getElementsByClassName('yearly-2month-offer'));
 
     yearlyOffer.forEach((element, index) => {
-        element.style.display = "none";
+        element.style.visibility = "hidden";
         element.dataset.duration = "monthly";
     });
 
@@ -187,6 +220,11 @@ function planMonthly() {
     });
 }
 function planYearly() {
+    // change css
+    document.getElementsByClassName('yearly')[0].classList.add('slided');
+    document.getElementsByClassName('monthly')[0].classList.remove('slided');
+
+
     // changing master Object planDuration according to slider
     masterObject.planDuration = "yearly";
 
@@ -209,7 +247,7 @@ function planYearly() {
     const yearlyOffer = Array.from(document.getElementsByClassName('yearly-2month-offer'));
 
     yearlyOffer.forEach((element, index) => {
-        element.style.display = "block";
+        element.style.visibility = "visible";
         element.dataset.duration = "yearly";
     });
 

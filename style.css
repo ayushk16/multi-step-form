@@ -153,7 +153,23 @@
     border-radius: 7px;
 }
 
+.label{
+    /* border: 1px solid red; */
+    position: relative;
+}
 
+.error-step1{
+    display: none;
+    position:  absolute;
+    right: 0;
+    color: var(--Strawberry-red);
+    top : 0;
+}
+
+
+.redborder{
+    border-color: red;
+}
 
 .input{
     font-size: 1.2rem;

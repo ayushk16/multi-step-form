@@ -83,20 +83,25 @@
                 <form class="form">
                     <div class="form-fields">
                         <div class="different-info">
-                            <label class="label" for="name">Name</label>
+                            <label class="label" for="name">Name<div class="error-step1" id="name-error">this field is
+                                    required</div></label>
                             <input type="text" id="user-name" class="input" id="name" name="name"
                                 placeholder="e.g. Stephen King" required>
 
                         </div>
                         <div class="different-info">
-                            <label class="label" for="email">Email Address</label>
+                            <label class="label" for="email">Email Address<div class="error-step1" id="email-error">this
+                                    field is
+                                    required</div></label>
                             <input type="email" id="user-email" class="input" name="email" id="email"
                                 placeholder="e.g. stephenking@lorem.com" required>
 
                         </div>
                         <div class="different-info">
-                            <label class="label" for="phone">Phone Number</label>
-                            <input type="text" id="user-phone" class="input" name="phone" id="phone"
+                            <label class="label" for="phone">Phone Number<div class="error-step1" id="phone-error">this
+                                    field is
+                                    required</div></label>
+                            <input type="number" id="user-phone" class="input" name="phone" id="phone"
                                 placeholder="e.g. +1 234 567 890" phone>
                         </div>
                         <div>

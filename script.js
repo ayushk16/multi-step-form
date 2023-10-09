@@ -12,6 +12,7 @@ const White = "hsl(0, 0%, 100%)";
 
 const formArea = document.getElementById('form-area');
 
+// prices object
 let prices = {
     plans: {
         monthly: {
@@ -50,8 +51,6 @@ let masterObject = {
         largerStorage: false,
         customizableProfile: false
     }
-
-
 }
 
 function clearError() {
@@ -59,7 +58,6 @@ function clearError() {
     errorAlert.forEach((element, i) => {
         element.style.display = "none";
         element.parentElement.nextElementSibling.style.borderColor = Lightgray;
-
     });
 }
 
@@ -67,7 +65,6 @@ function showError(index) {
     let errorAlert = Array.from(document.getElementsByClassName('error-step1'));
     errorAlert.forEach((element, i) => {
         if (i == index - 1) {
-
             element.style.display = "block";
             element.parentElement.nextElementSibling.style.borderColor = Strawberryred;
         }
@@ -114,10 +111,7 @@ function highlightStep(index) {
             element.style.display = 'none';
         }
     })
-
-
 }
-
 
 function validateStep1(nameField, emailField, phoneField) {
     const name = nameField.value;
@@ -219,15 +213,14 @@ function planMonthly() {
         element.innerHTML = "mo"
     });
 }
+
 function planYearly() {
     // change css
     document.getElementsByClassName('yearly')[0].classList.add('slided');
     document.getElementsByClassName('monthly')[0].classList.remove('slided');
 
-
     // changing master Object planDuration according to slider
     masterObject.planDuration = "yearly";
-
 
     // reseting masterObject prices and duration if fluctuated
     if (masterObject.planPrice == prices.plans.monthly.pro || masterObject.planPrice == prices.plans.yearly.pro) {
@@ -271,6 +264,7 @@ function planYearly() {
 
 function removeBorderPlan() {
     let planCards = Array.from(document.getElementsByClassName('plan-card'));
+
     planCards.forEach((element, index) => {
         element.parentElement.previousElementSibling.checked = false;
         element.classList.remove('add-border-plan-card');
@@ -279,12 +273,12 @@ function removeBorderPlan() {
 
 function step5() {
     highlightStep(5);
-    document.getElementsByClassName('thank-u-container')[0].addEventListener('click', (e) => {
-        step4();
-    });
 
+    // listning for click on thankyou to go back for development testing
+    // document.getElementsByClassName('thank-u-container')[0].addEventListener('click', (e) => {
+    //     step4();
+    // });
 }
-
 
 function step4() {
     highlightStep(4);
@@ -388,9 +382,11 @@ function step4() {
     document.getElementById('bill-plan-price').innerText = `$${currentMasterObject.planPrice}/${currentMasterObject.planDurationShortHand}`;
 
     let addonArea = document.getElementsByClassName("bill-add-ons-detail")[0];
-    // console.log(addonArea);
+
     addonArea.innerHTML = '';
+
     const currentAddOns = currentMasterObject.addons;
+
     for (const addon in currentAddOns) {
         let newAddOn = document.createElement('div');
         newAddOn.classList.add('bill-add-ons');
@@ -406,27 +402,17 @@ function step4() {
         newAddOnPrice.innerText = `+$${currentAddOns[addon]['addonPrice']}/${currentMasterObject.planDurationShortHand}`
 
         newAddOn.appendChild(newAddOnPrice);
-
         addonArea.appendChild(newAddOn);
     }
 
     let totalBillDuration = document.getElementById('total-duration');
     totalBillDuration.innerText = `Total(per ${currentMasterObject.planDuration})`
 
-
     let grandTotalArea = document.getElementById('grand-total');
-
     grandTotalArea.innerText = `$${grandTotal}/${currentMasterObject.planDurationShortHand}`;
 }
 
-
-
-
-
-
-
 function step3() {
-
     highlightStep(3);
     let duration;
     let currentRates = {};
@@ -472,7 +458,6 @@ function step3() {
         step4();
     })
 
-
     const onlineService = document.getElementById('online-service');
     const largerStorage = document.getElementById('larger-storage');
     const customizableProfile = document.getElementById('customizable-profile');
@@ -481,12 +466,9 @@ function step3() {
     // check if being checked already
     // change only values if duration changes
 
-    // let currentYearlyChecks = masterObject.addons.yearly;
-    // let currentMonthlyChecks = masterObject.addons;
     let currentlyChecked = masterObject.addons;
 
     for (const addons in currentlyChecked) {
-        // console.log(addons);
         if (currentlyChecked[addons] == true) {
             if (addons == "onlineService") {
                 onlineService.checked = true;
@@ -517,13 +499,12 @@ function step3() {
         }
     }
 
-    // console.log(onlineService, largerStorage, customizableProfile);
-
     // listening parent of all checkboxes and changing masterObject and dom accordingly
     const addOnsSelectionArea = document.getElementsByClassName('add-ons-selection-field')[0];
     addOnsSelectionArea.addEventListener('click', (e) => {
         if (e.target.hasAttribute("data-tagname")) {
             const addon = e.target.value;
+
             // highlighting dom and updating masterObject
             if (e.target.checked) {
                 console.log("checked")
@@ -551,17 +532,11 @@ function step3() {
                 }
             }
         }
-        // console.log(masterObject.addons);
     })
 }
 
 
 function step2() {
-
-    // formArea.innerHTML = `
-
-    // `
-
     highlightStep(2);
 
     // listening goback btn at step 2;
@@ -615,6 +590,7 @@ function step2() {
     let planCards = Array.from(document.getElementsByClassName("check-plan"));
     planCards.forEach(element => {
         element.addEventListener('click', (e) => {
+
             // marking checkbox and adding border to target
             removeBorderPlan();
             e.target.checked = true;

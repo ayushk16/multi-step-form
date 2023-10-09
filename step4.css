@@ -1,0 +1,91 @@
+.billing-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* border: 2px solid black; */
+    gap: 2rem;
+}
+
+.bill-spread {
+
+    border-radius: 20px;
+    background-color: var(--Magnolia);
+
+}
+
+
+.bill-plan-detail{
+    padding: 1.5rem;
+    /* border: 2px solid black;     */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.line{
+    display: flex;
+    justify-content: center;
+}
+.line>div{
+    width: 90%;
+    border-bottom: 1px solid var(--Cool-gray);
+}
+
+.bill-add-ons, .total-bill{
+    /* border: 1px solid red; */
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.bill-plan-name , .bill-plan-price{
+    font-size: 1.2rem;
+    font-family: 'ubuntu-m';
+}
+
+.bill-plan-price{
+    font-weight: 800;
+}
+
+.change-selections , .bill-add-ons-name , .total-duration{
+    font-size: 1rem;
+    color: var(--Cool-gray);
+}
+
+.change-selections{
+    text-decoration: underline;
+}
+
+.change-selections:hover{
+    color: var(--Purplish-blue);
+    cursor: pointer;
+}
+
+.grand-total{
+    color: var(--Purplish-blue);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.confirm-btn{
+    background-color: var(--Purplish-blue);
+    width: 150px;
+}
+
+.confirm-btn:hover{
+    opacity: 0.25;
+}
+
+@media (max-width: 544px) {
+    .bill-plan-name , .bill-plan-price{
+        font-size: 1.1rem;
+    }
+
+
+    .grand-total{
+        font-size: 1.3rem;
+    }
+}
+    

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="step2.css">
     <link rel="stylesheet" href="step3.css">
+    <link rel="stylesheet" href="step4.css">
     <title>Multi-step-form</title>
 </head>
 
@@ -68,6 +69,336 @@
 
         <main class="form-area" id="form-area">
 
+            <div class="form-container steps" data-step="1">
+                <header class="form-header">
+                    <h1 class="main-form-heading">
+                        Personal info
+                    </h1>
+                    <p class="form-parah">
+                        Please provide your name, email address, and phone number.
+                    </p>
+                </header>
+
+                <form class="form">
+                    <div class="form-fields">
+                        <div class="different-info">
+                            <label class="label" for="name">Name</label>
+                            <input type="text" id="user-name" class="input" id="name" name="name"
+                                placeholder="e.g. Stephen King" required>
+
+                        </div>
+                        <div class="different-info">
+                            <label class="label" for="email">Email Address</label>
+                            <input type="email" id="user-email" class="input" name="email" id="email"
+                                placeholder="e.g. stephenking@lorem.com" required>
+
+                        </div>
+                        <div class="different-info">
+                            <label class="label" for="phone">Phone Number</label>
+                            <input type="text" id="user-phone" class="input" name="phone" id="phone"
+                                placeholder="e.g. +1 234 567 890" phone>
+                        </div>
+                        <div>
+                            <button type="submit" id="submit-step-1" style="display: none;">submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="btn-holder steps" data-step="1">
+                <div class="internal-btn-holder">
+                    <div class="goback-btn" id='go-back-step1'>
+                        Go Back
+                    </div>
+                    <button class="next-step-btn" id="next-btn-step1">
+                        Next Step
+                    </button>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="form-container steps" data-step="2">
+                <header class="form-header">
+                    <h1 class="main-form-heading">
+                        Select Your plan
+                    </h1>
+                    <p class="form-parah">
+                        You have the option of monthly or yearly billing.
+                    </p>
+                </header>
+
+                <form class="form">
+
+                    <div class="plan-select-field">
+                        <div>
+                            <input type="radio" id="arcade" class="check-plan" name="plan" value="arcade">
+                            <label for="arcade">
+                                <div class="plan-card">
+                                    <div class="plan-img-container">
+                                        <img src="./assets/images/icon-arcade.svg" alt="arcade">
+                                    </div>
+                                    <div class="plan-details">
+                                        <span class="plan-name">
+                                            Arcade
+                                        </span>
+                                        <br>
+                                        <span class="plan-price">
+                                            $<span id="arcade-price"></span>/<span class="per-year-month"></span>
+                                        </span>
+                                        <br>
+                                        <span class="yearly-2month-offer">
+                                            2 months free
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </label>
+                        </div>
+                        <br>
+                        <div>
+                            <input type="radio" id="advanced" class="check-plan" name="plan" value="advanced">
+                            <label for="advanced">
+                                <div class="plan-card">
+                                    <div class="plan-img-container">
+                                        <img src="./assets/images/icon-advanced.svg" alt="arcade">
+                                    </div>
+                                    <div class="plan-details">
+                                        <span class="plan-name">
+                                            Advanced
+                                        </span>
+                                        <br>
+                                        <span class="plan-price">
+                                            $<span id="advanced-price"></span>/<span class="per-year-month"></span>
+                                        </span>
+                                        <br>
+                                        <span class="yearly-2month-offer">
+                                            2 months free
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </label>
+                        </div>
+                        <br>
+                        <div>
+                            <input type="radio" id="pro" class="check-plan" name="plan" value="pro">
+                            <label for="pro">
+                                <div class="plan-card">
+                                    <div class="plan-img-container">
+                                        <img src="./assets/images/icon-pro.svg" alt="arcade">
+                                    </div>
+                                    <div class="plan-details">
+                                        <span class="plan-name">
+                                            Pro
+                                        </span>
+                                        <br>
+                                        <span class="plan-price">
+                                            $<span id="pro-price"></span>/<span class="per-year-month"></span>
+                                        </span>
+                                        <br>
+                                        <span class="yearly-2month-offer">
+                                            2 months free
+                                        </span>
+                                    </div>
+
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="plan-duration-field">
+                        <div class="duration-selection">
+                            <div class="monthly slided">
+                                Monthly
+                            </div>
+                            <div class="slidearea">
+                                <label class="switch">
+                                    <input type="checkbox" id="slider">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="yearly ">
+                                Yearly
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="btn-holder steps" data-step="2">
+                <div class="internal-btn-holder">
+                    <div class="goback-btn" id="goback-step2">
+                        Go Back
+                    </div>
+                    <button class="next-step-btn" id="next-btn-step2">
+                        Next Step
+                    </button>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-container steps" data-step="3">
+                <header class="form-header">
+                    <h1 class="main-form-heading">
+                        Plan add-ons
+                    </h1>
+                    <p class="form-parah">
+                        Add-ons help enhance your gaming experience.
+                    </p>
+                </header>
+
+                <form class="form">
+
+                    <div class="add-ons-selection-field">
+                        <div class="add-ons-card">
+                            <label for="online-service" class="add-ons-lable" id="online-service-lable">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" data-tagname="input" name="services" id="online-service"
+                                        class="add-ons" value="online-service">
+                                    <span class="checkmark"></span>
+                                </div>
+                                <div class="add-ons-details">
+                                    <div class="add-ons-info">
+                                        <div class="add-ons-name">
+                                            online-service
+                                        </div>
+                                        <div class="add-ons-parah">
+                                            Access to multiplier games
+                                        </div>
+                                    </div>
+                                    <div class="add-ons-price-info">
+                                        +$<span class="add-ons-price"
+                                            id="online-service-price">${currentRates.onlineService}</span>/<span
+                                            class="add-ons-duration">${duration}</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <br>
+                        <div class="add-ons-card">
+                            <label for="larger-storage" class="add-ons-lable" id="larger-storage-lable">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" data-tagname="input" name="services" id="larger-storage"
+                                        class="add-ons" value="larger-storage">
+                                    <span class="checkmark"></span>
+                                </div>
+                                <div class="add-ons-details">
+                                    <div class="add-ons-info">
+                                        <div class="add-ons-name">
+                                            Larger storage
+                                        </div>
+                                        <div class="add-ons-parah">
+                                            Extra 1TB of cloud save
+                                        </div>
+                                    </div>
+                                    <div class="add-ons-price-info">
+                                        +$<span class="add-ons-price"
+                                            id="larger-storage-price">${currentRates.largerStorage}</span>/<span
+                                            class="add-ons-duration">${duration}</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <br>
+                        <div class="add-ons-card">
+                            <label for="customizable-profile" class="add-ons-lable" id="customizable-profile-lable">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" data-tagname="input" name="services"
+                                        id="customizable-profile" class="add-ons" value="customizable-profile">
+                                    <span class="checkmark"></span>
+                                </div>
+                                <div class="add-ons-details">
+                                    <div class="add-ons-info">
+                                        <div class="add-ons-name">
+                                            Customizable profile
+                                        </div>
+                                        <div class="add-ons-parah">
+                                            Custom theme on your profile
+                                        </div>
+                                    </div>
+                                    <div class="add-ons-price-info">
+                                        +$<span class="add-ons-price"
+                                            id="customizable-profile-price">${currentRates.customizableProfile}</span>/<span
+                                            class="add-ons-duration">${duration}</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="btn-holder steps" data-step="3">
+                <div class="internal-btn-holder">
+                    <div class="goback-btn" id="goback-step3">
+                        Go Back
+                    </div>
+                    <button class="next-step-btn" id="next-btn-step3">
+                        Next Step
+                    </button>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="form-container steps" data-step="4">
+                <header class="form-header">
+                    <h1 class="main-form-heading">
+                        Finishing up
+                    </h1>
+                    <p class="form-parah">
+                        Double-check everything looks OK before confirming.
+                    </p>
+                </header>
+                <div class="billing-area">
+                    <div class="bill-spread">
+                        <div class="bill-plan-detail">
+                            <div class="bill-plan-info">
+                                <!-- <div><span></span>(<span></span>)</div> -->
+                                <div class="bill-plan-name" id="bill-plan-name">Arcade(Monthly)</div>
+                                <div class="change-selections" id="change-btn">Change</div>
+                            </div>
+                            <div class="bill-plan-pricing-info">
+                                <!-- <div>$<span></span>/<span></span></div> -->
+                                <div class="bill-plan-price" id="bill-plan-price">$9/mo</div>
+                            </div>
+                        </div>
+                        <div class="line">
+                            <div></div>
+                        </div>
+                        <div class="bill-add-ons-detail">
+                            <div class="bill-add-ons"><span class="bill-add-ons-name">Online service</span><span
+                                    class="bill-add-ons-price">+$1/mo</span></div>
+                            <div class="bill-add-ons"><span class="bill-add-ons-name">Larger storage</span><span
+                                    class="bill-add-ons-price">+$2/mo</span></div>
+                        </div>
+                    </div>
+                    <div class="total-bill" id="total-bill">
+                        <div class="total-duration" id="total-duration">Total(per month)</div>
+                        <div class="grand-total" id="grand-total">$12/mo</div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-holder steps" data-step="4">
+                <div class="internal-btn-holder">
+                    <div class="goback-btn" id="goback-step4">
+                        Go Back
+                    </div>
+                    <button class="next-step-btn confirm-btn" id="confirm-btn">
+                        Confirm
+                    </button>
+                </div>
+            </div>
         </main>
     </div>
     <script src="./script.js"></script>

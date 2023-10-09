@@ -44,25 +44,18 @@ let masterObject = {
     userEmail: "",
     userNumber: "",
     planDuration: "monthly",
-    planPrice: prices.plans.monthly.advanced,
+    planPrice: prices.plans.monthly.arcade,
     addons: {
-        monthly: {
-            onlineService: false,
-            largerStorage: false,
-            customizableProfile: false
-        },
-        yearly: {
-            onlineService: false,
-            largerStorage: false,
-            customizableProfile: false
-        }
+        onlineService: false,
+        largerStorage: false,
+        customizableProfile: false
     }
 
 
 }
 
 function highlightStep(index) {
-    listOfNumber = Array.from(document.getElementsByClassName('list-number'));
+    let listOfNumber = Array.from(document.getElementsByClassName('list-number'));
     listOfNumber.forEach((element, i) => {
         if (i == index - 1) {
             element.classList.remove('nonhighlight');
@@ -73,6 +66,20 @@ function highlightStep(index) {
             element.classList.add('nonhighlight');
         }
     });
+
+    let listofSteps = Array.from(document.getElementsByClassName('steps'));
+
+    listofSteps.forEach((element, i) => {
+        if (element.getAttribute('data-step') == `${index}`) {
+            element.style.display = 'flex';
+            console.log(element);
+        }
+        else {
+            element.style.display = 'none';
+        }
+    })
+
+
 }
 
 
@@ -80,9 +87,10 @@ function validateStep1(nameField, emailField, phoneField) {
     const name = nameField.value;
     const email = emailField.value;
     const phone = phoneField.value;
+    // regex patter for validation
     let emailpattern = /^[^ ]+@[^ ]+.[a-z]{2,3}$/;
-    // let phonepattern = /\+\d{1}\s\d{3}\s\d{3}\s\d{3}/
     let phonepattern = /\b(?:\+?\d{1,3}[-. ]?)?\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}\b/;
+    // let phonepattern = /\+\d{1}\s\d{3}\s\d{3}\s\d{3}/
     // let phonepattern = /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
     // let phonepattern = /+\d{1,3}\d{3}\d{3}\d{3}$/;
     if (name == "") {
@@ -100,6 +108,7 @@ function validateStep1(nameField, emailField, phoneField) {
             }
             else {
                 console.log("go ahead");
+                // update masterObject
                 masterObject.userName = name;
                 masterObject.userEmail = email;
                 masterObject.userNumber = phone;
@@ -107,10 +116,10 @@ function validateStep1(nameField, emailField, phoneField) {
             }
         }
     }
-
 }
 
 function validation() {
+    // extracting tags with user-detail for check
     const nameField = document.getElementById('user-name');
     const emailField = document.getElementById('user-email');
     const phoneField = document.getElementById('user-phone')
@@ -119,20 +128,25 @@ function validation() {
 }
 
 function planMonthly() {
+    // changing master Object planDuration according slider
+    masterObject.planDuration = "monthly";
+
+    // reseting masterObject prices if fluctuated
+
     if (masterObject.planPrice == prices.plans.monthly.pro || masterObject.planPrice == prices.plans.yearly.pro) {
         masterObject.planPrice = prices.plans.monthly.pro;
-        masterObject.planDuration = "monthly";
+        // masterObject.planDuration = "monthly";
     }
     else if (masterObject.planPrice == prices.plans.monthly.advanced || masterObject.planPrice == prices.plans.yearly.advanced) {
         masterObject.planPrice = prices.plans.monthly.advanced;
-        masterObject.planDuration = "monthly";
-
+        // masterObject.planDuration = "monthly";
     }
     else {
         masterObject.planPrice = prices.plans.monthly.arcade;
-        masterObject.planDuration = "monthly";
+        // masterObject.planDuration = "monthly";
     }
 
+    // hide yearly price offer and adding data-set duration for later use
     const yearlyOffer = Array.from(document.getElementsByClassName('yearly-2month-offer'));
 
     yearlyOffer.forEach((element, index) => {
@@ -140,15 +154,17 @@ function planMonthly() {
         element.dataset.duration = "monthly";
     });
 
+    // setting monthly prices in cards
     document.getElementById('arcade-price').innerHTML = prices.plans.monthly.arcade;
     document.getElementById('advanced-price').innerHTML = prices.plans.monthly.advanced;
     document.getElementById('pro-price').innerHTML = prices.plans.monthly.pro;
 
+    // creating data-set price to extract values latter
     document.getElementById('arcade').dataset.price = prices.plans.monthly.arcade;
     document.getElementById('advanced').dataset.price = prices.plans.monthly.advanced;
     document.getElementById('pro').dataset.price = prices.plans.monthly.pro;
 
-
+    // changing duration in dom to month
     let yearMonthArray = Array.from(document.getElementsByClassName("per-year-month"));
 
     yearMonthArray.forEach((element, index) => {
@@ -156,21 +172,25 @@ function planMonthly() {
     });
 }
 function planYearly() {
+    // changing master Object planDuration according to slider
+    masterObject.planDuration = "yearly";
 
+
+    // reseting masterObject prices and duration if fluctuated
     if (masterObject.planPrice == prices.plans.monthly.pro || masterObject.planPrice == prices.plans.yearly.pro) {
         masterObject.planPrice = prices.plans.yearly.pro;
-        masterObject.planDuration = "yearly";
+        // masterObject.planDuration = "yearly";
     }
     else if (masterObject.planPrice == prices.plans.monthly.advanced || masterObject.planPrice == prices.plans.yearly.advanced) {
         masterObject.planPrice = prices.plans.yearly.advanced;
-        masterObject.planDuration = "yearly";
-
+        // masterObject.planDuration = "yearly";
     }
     else {
-        masterObject.planPrice = prices.plans.monthly.arcade;
-        masterObject.planDuration = "yearly";
+        masterObject.planPrice = prices.plans.yearly.arcade;
+        // masterObject.planDuration = "yearly";
     }
 
+    // show yearly price offer and adding data-set duration for later use
     const yearlyOffer = Array.from(document.getElementsByClassName('yearly-2month-offer'));
 
     yearlyOffer.forEach((element, index) => {
@@ -178,14 +198,17 @@ function planYearly() {
         element.dataset.duration = "yearly";
     });
 
+    // setting yearly prices in cards
     document.getElementById('arcade-price').innerHTML = prices.plans.yearly.arcade;
     document.getElementById('advanced-price').innerHTML = prices.plans.yearly.advanced;
     document.getElementById('pro-price').innerHTML = prices.plans.yearly.pro;
 
+    // creating data-set price to extract values latter
     document.getElementById('arcade').dataset.price = prices.plans.yearly.arcade;
     document.getElementById('advanced').dataset.price = prices.plans.yearly.advanced;
     document.getElementById('pro').dataset.price = prices.plans.yearly.pro;
 
+    // changing duration in dom to year
     let yearMonthArray = Array.from(document.getElementsByClassName("per-year-month"));
 
     yearMonthArray.forEach((element, index) => {
@@ -203,8 +226,136 @@ function removeBorderPlan() {
 
 
 function step4() {
+    highlightStep(4);
+
+    document.getElementById('goback-step4').addEventListener('click', (e) => { step3() });
+
+    document.getElementById('change-btn').addEventListener('click', (e) => { step2() });
+
+    const planDuration = masterObject.planDuration;
+    const basePrice = masterObject.planPrice;
+
+    let grandTotal = 0;
+
+    let currentMasterObject = {
+        planName: "",
+        planDuration: "",
+        planDurationShortHand: "",
+        planPrice: 9,
+        addons: [],
+        total: 9
+    }
+
+    // setting plan price using masterObject price
+    currentMasterObject.planPrice = masterObject.planPrice;
+
+    // update grand total
+    grandTotal += masterObject.planPrice;
+
+    // setting plan name using masterObject price
+    if (masterObject.planPrice == prices.plans.monthly.pro || masterObject.planPrice == prices.plans.yearly.pro) {
+        currentMasterObject.planName = "Pro";
+    }
+    else if (masterObject.planPrice == prices.plans.monthly.advanced || masterObject.planPrice == prices.plans.yearly.advanced) {
+        currentMasterObject.planName = "Advanced";
+    }
+    else {
+        currentMasterObject.planName = "Arcade";
+    }
+
+    // setting planDuration and planDurationShortHand
+    if (masterObject.planDuration == "monthly") {
+        currentMasterObject.planDuration = "month";
+        currentMasterObject.planDurationShortHand = "mo"
+    }
+    else if (masterObject.planDuration == "yearly") {
+        currentMasterObject.planDuration = "Year";
+        currentMasterObject.planDurationShortHand = "yr"
+    }
+
+    // setting addons if any
+    const allAddons = masterObject.addons;
+    console.log(allAddons);
+    for (const addon in allAddons) {
+        if (allAddons[addon] == true) {
+            let tempObj = {
+                addonName: "",
+                addonPrice: 0
+            };
+            // console.log(addon);
+            if (addon == 'onlineService') {
+                tempObj.addonName = "online services";
+                if (masterObject.planDuration == "monthly") {
+                    tempObj.addonPrice = prices.addons.monthly.onlineService;
+                }
+                else {
+                    tempObj.addonPrice = prices.addons.yearly.onlineService;
+                }
+            }
+            else if (addon == 'largerStorage') {
+                tempObj.addonName = "larger storage";
+                if (masterObject.planDuration == "monthly") {
+                    tempObj.addonPrice = prices.addons.monthly.largerStorage;
+                }
+                else {
+                    tempObj.addonPrice = prices.addons.yearly.largerStorage;
+                }
+            }
+            else if (addon == 'customizableProfile') {
+                tempObj.addonName = "customizable profile";
+                if (masterObject.planDuration == "monthly") {
+                    tempObj.addonPrice = prices.addons.monthly.customizableProfile;
+                }
+                else {
+                    tempObj.addonPrice = prices.addons.yearly.customizableProfile;
+                }
+            }
+            // update grand total
+            grandTotal += tempObj.addonPrice;
+
+            // update currentMasterObject
+            currentMasterObject.addons.push(tempObj);
+        }
+    }
+
+    document.getElementById('confirm-btn').addEventListener('click', (e) => {
+        console.log(currentMasterObject);
+    })
+
+    // setting elements in document
+    document.getElementById('bill-plan-name').innerText = `${currentMasterObject.planName}(${currentMasterObject.planDuration})`;
+    document.getElementById('bill-plan-price').innerText = `$${currentMasterObject.planPrice}/${currentMasterObject.planDurationShortHand}`;
+
+    let addonArea = document.getElementsByClassName("bill-add-ons-detail")[0];
+    // console.log(addonArea);
+    addonArea.innerHTML = '';
+    const currentAddOns = currentMasterObject.addons;
+    for (const addon in currentAddOns) {
+        let newAddOn = document.createElement('div');
+        newAddOn.classList.add('bill-add-ons');
+
+        let newAddOnName = document.createElement('span');
+        newAddOnName.classList.add('bill-add-ons-name');
+        newAddOnName.innerText = `${currentAddOns[addon]['addonName']}`
+
+        newAddOn.appendChild(newAddOnName);
+
+        let newAddOnPrice = document.createElement('span');
+        newAddOnPrice.classList.add('bill-add-ons-price');
+        newAddOnPrice.innerText = `+$${currentAddOns[addon]['addonPrice']}/${currentMasterObject.planDurationShortHand}`
+
+        newAddOn.appendChild(newAddOnPrice);
+
+        addonArea.appendChild(newAddOn);
+    }
+
+    let totalBillDuration = document.getElementById('total-duration');
+    totalBillDuration.innerText = `Total(per ${currentMasterObject.planDuration})`
 
 
+    let grandTotalArea = document.getElementById('grand-total');
+
+    grandTotalArea.innerText = `$${grandTotal}/${currentMasterObject.planDurationShortHand}`;
 }
 
 
@@ -214,6 +365,8 @@ function step4() {
 
 
 function step3() {
+
+    highlightStep(3);
     let duration;
     let currentRates = {};
     if (masterObject.planDuration == "monthly") {
@@ -233,110 +386,26 @@ function step3() {
         }
     }
 
-    formArea.innerHTML = `
-        <div class="form-container">
-            <header class="form-header">
-                <h1 class="main-form-heading">
-                    Plan add-ons
-                </h1>
-                <p class="form-parah">
-                    Add-ons help enhance your gaming experience.
-                </p>
-            </header>
+    // set prices in dom 
+    document.getElementById('online-service-price').innerText = currentRates.onlineService;
+    document.getElementById('larger-storage-price').innerText = currentRates.largerStorage;
+    document.getElementById('customizable-profile-price').innerText = currentRates.customizableProfile;
 
-            <form class="form">
+    // set duration in dom
+    let addonDurationArr = Array.from(document.getElementsByClassName('add-ons-duration'))
+    addonDurationArr.forEach((element, index) => {
+        element.innerText = duration;
+    });
 
-                <div class="add-ons-selection-field">
-                    <div class="add-ons-card">
-                    <label for="online-service" class="add-ons-lable" id="online-service-lable">
-                        <div class="checkbox-container">
-                            <input type="checkbox" data-tagname="input" name="services" id="online-service" class="add-ons" value="online-service">
-                            <span class="checkmark"></span>
-                        </div>
-                        <div class="add-ons-details">
-                            <div class="add-ons-info">
-                                <div class="add-ons-name">
-                                    online-service
-                                </div>
-                                <div class="add-ons-parah">
-                                    Access to multiplier games
-                                </div>
-                            </div>
-                            <div class="add-ons-price-info">
-                                +$<span class="add-ons-price" id="online-service-price">${currentRates.onlineService}</span>/<span
-                                    class="add-ons-duration">${duration}</span>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-                <br>
-                <div class="add-ons-card">
-                    <label for="larger-storage" class="add-ons-lable" id="larger-storage-lable">
-                        <div class="checkbox-container">
-                            <input type="checkbox" data-tagname="input" name="services" id="larger-storage" class="add-ons" value="larger-storage">
-                            <span class="checkmark"></span>
-                        </div>
-                        <div class="add-ons-details">
-                            <div class="add-ons-info">
-                                <div class="add-ons-name">
-                                    Larger storage
-                                </div>
-                                <div class="add-ons-parah">
-                                    Extra 1TB of cloud save
-                                </div>
-                            </div>
-                            <div class="add-ons-price-info">
-                                +$<span class="add-ons-price" id="larger-storage-price">${currentRates.largerStorage}</span>/<span
-                                    class="add-ons-duration">${duration}</span>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-                <br>
-                <div class="add-ons-card">
-                    <label for="customizable-profile" class="add-ons-lable" id="customizable-profile-lable">
-                        <div class="checkbox-container">
-                            <input type="checkbox" data-tagname="input" name="services" id="customizable-profile" class="add-ons" value="customizable-profile">
-                            <span class="checkmark"></span>
-                        </div>
-                        <div class="add-ons-details">
-                            <div class="add-ons-info">
-                                <div class="add-ons-name">
-                                    Customizable profile
-                                </div>
-                                <div class="add-ons-parah">
-                                    Custom theme on your profile
-                                </div>
-                            </div>
-                            <div class="add-ons-price-info">
-                                +$<span class="add-ons-price" id="customizable-profile-price">${currentRates.customizableProfile}</span>/<span
-                                    class="add-ons-duration">${duration}</span>
-                            </div>
-                        </div>
-                    </label>
-                </div>
-                </div>
-            </form>
-        </div>
-        <div class="btn-holder">
-            <div class="internal-btn-holder">
-                <div class="goback-btn" id="goback-step3">
-                    Go Back
-                </div>
-                <button class="next-step-btn" id="next-btn-step3">
-                    Next Step
-                </button>
-            </div>
-        </div>
-    `;
-    highlightStep(3);
-
+    // listening goback btn at step3
     const gobackBtn = document.getElementById('goback-step3');
-    const nextBtnStep3 = document.getElementById('next-btn-step3');
 
     gobackBtn.addEventListener('click', (e) => {
         step2();
     })
+
+    // listening next step btn at step3
+    const nextBtnStep3 = document.getElementById('next-btn-step3');
 
     nextBtnStep3.addEventListener('click', (e) => {
         step4();
@@ -346,272 +415,108 @@ function step3() {
     const onlineService = document.getElementById('online-service');
     const largerStorage = document.getElementById('larger-storage');
     const customizableProfile = document.getElementById('customizable-profile');
-    console.log(document.getElementsByName('services').values);
 
+    // only for phase when step3 is loaded
     // check if being checked already
-    let currentYearlyChecks = masterObject.addons.yearly;
-    let currentMonthlyChecks = masterObject.addons.monthly;
-    if (masterObject.planDuration == "monthly") {
-        // check corresponding add ons in dom
-        for (const addons in currentMonthlyChecks) {
-            if (currentMonthlyChecks[addons] == true) {
-                if (addons == "onlineService") {
-                    onlineService.checked = true;
-                    onlineService.parentElement.parentElement.classList.add('checkedHighlight')
-                }
-                else if (addons == "largerStorage") {
-                    largerStorage.checked = true;
-                    largerStorage.parentElement.parentElement.classList.add('checkedHighlight')
-                }
-                else if (addons == "customizableProfile") {
-                    customizableProfile.checked = true;
-                    customizableProfile.parentElement.parentElement.classList.add('checkedHighlight')
-                }
+    // change only values if duration changes
+
+    // let currentYearlyChecks = masterObject.addons.yearly;
+    // let currentMonthlyChecks = masterObject.addons;
+    let currentlyChecked = masterObject.addons;
+
+    for (const addons in currentlyChecked) {
+        // console.log(addons);
+        if (currentlyChecked[addons] == true) {
+            if (addons == "onlineService") {
+                onlineService.checked = true;
+                onlineService.parentElement.parentElement.classList.add('checkedHighlight')
+            }
+            else if (addons == "largerStorage") {
+                largerStorage.checked = true;
+                largerStorage.parentElement.parentElement.classList.add('checkedHighlight')
+            }
+            else if (addons == "customizableProfile") {
+                customizableProfile.checked = true;
+                customizableProfile.parentElement.parentElement.classList.add('checkedHighlight')
             }
         }
-        // clear yearly addons in master object
-        for (const addons in currentYearlyChecks) {
-            currentYearlyChecks[addons] = false;
-        }
-        console.log(currentYearlyChecks)
-        console.log(currentMonthlyChecks);
-        console.log(masterObject);
-    }
-    else {
-        // check corresponding add ons in dom
-        for (const addons in currentYearlyChecks) {
-            if (currentYearlyChecks[addons] == true) {
-                if (addons == "onlineService") {
-                    onlineService.checked = true;
-                    onlineService.parentElement.parentElement.classList.add('checkedHighlight')
-                }
-                else if (addons == "largerStorage") {
-                    largerStorage.checked = true;
-                    largerStorage.parentElement.parentElement.classList.add('checkedHighlight')
-                }
-                else if (addons == "customizableProfile") {
-                    customizableProfile.checked = true;
-                    customizableProfile.parentElement.parentElement.classList.add('checkedHighlight')
-                }
+        else if (currentlyChecked[addons] == false) {
+            if (addons == "onlineService") {
+                onlineService.checked = false;
+                onlineService.parentElement.parentElement.classList.remove('checkedHighlight')
+            }
+            else if (addons == "largerStorage") {
+                largerStorage.checked = false;
+                largerStorage.parentElement.parentElement.classList.remove('checkedHighlight')
+            }
+            else if (addons == "customizableProfile") {
+                customizableProfile.checked = false;
+                customizableProfile.parentElement.parentElement.classList.remove('checkedHighlight')
             }
         }
-        // clear monthly addons in master object
-        for (const addons in currentMonthlyChecks) {
-            currentMonthlyChecks[addons] = false;
-        }
-        console.log(currentYearlyChecks)
-        console.log(currentMonthlyChecks);
-        console.log(masterObject);
     }
 
-    console.log(onlineService, largerStorage, customizableProfile);
+    // console.log(onlineService, largerStorage, customizableProfile);
+
+    // listening parent of all checkboxes and changing masterObject and dom accordingly
     const addOnsSelectionArea = document.getElementsByClassName('add-ons-selection-field')[0];
     addOnsSelectionArea.addEventListener('click', (e) => {
         if (e.target.hasAttribute("data-tagname")) {
             const addon = e.target.value;
+            // highlighting dom and updating masterObject
             if (e.target.checked) {
+                console.log("checked")
                 e.target.parentElement.parentElement.classList.add('checkedHighlight');
+                if (addon == "online-service") {
+                    masterObject.addons.onlineService = true;
+                }
+                else if (addon == "larger-storage") {
+                    masterObject.addons.largerStorage = true;
+                }
+                else if (addon == "customizable-profile") {
+                    masterObject.addons.customizableProfile = true;
+                }
             }
             else {
                 e.target.parentElement.parentElement.classList.remove('checkedHighlight');
-            }
-            if (masterObject.planDuration == "monthly") {
                 if (addon == "online-service") {
-                    if (masterObject.addons.monthly.onlineService == false) {
-                        masterObject.addons.monthly.onlineService = true;
-                    }
-                    else {
-                        masterObject.addons.monthly.onlineService = false;
-                    }
+                    masterObject.addons.onlineService = false;
                 }
                 else if (addon == "larger-storage") {
-                    if (masterObject.addons.monthly.largerStorage == false) {
-                        masterObject.addons.monthly.largerStorage = true;
-                    }
-                    else {
-                        masterObject.addons.monthly.largerStorage = false;
-                    }
+                    masterObject.addons.largerStorage = false;
                 }
                 else if (addon == "customizable-profile") {
-                    if (masterObject.addons.monthly.customizableProfile == false) {
-                        masterObject.addons.monthly.customizableProfile = true;
-                    }
-                    else {
-                        masterObject.addons.monthly.customizableProfile = false;
-                    }
+                    masterObject.addons.customizableProfile = false;
                 }
-                console.log(masterObject.addons.monthly);
-            }
-            else {
-                if (addon == "online-service") {
-                    if (masterObject.addons.yearly.onlineService == false) {
-                        masterObject.addons.yearly.onlineService = true;
-                    }
-                    else {
-                        masterObject.addons.yearly.onlineService = false;
-                    }
-                }
-                else if (addon == "larger-storage") {
-                    if (masterObject.addons.yearly.largerStorage == false) {
-                        masterObject.addons.yearly.largerStorage = true;
-                    }
-                    else {
-                        masterObject.addons.yearly.largerStorage = false;
-                    }
-                }
-                else if (addon == "customizable-profile") {
-                    if (masterObject.addons.yearly.customizableProfile == false) {
-                        masterObject.addons.yearly.customizableProfile = true;
-                    }
-                    else {
-                        masterObject.addons.yearly.customizableProfile = false;
-                    }
-                }
-                console.log(masterObject.addons.yearly);
             }
         }
-    }, true)
-
-
-
+        // console.log(masterObject.addons);
+    })
 }
 
 
 function step2() {
 
-    formArea.innerHTML = `
-    <div class="form-container">
-                <header class="form-header">
-                    <h1 class="main-form-heading">
-                        Select Your plan
-                    </h1>
-                    <p class="form-parah">
-                        You have the option of monthly or yearly billing.
-                    </p>
-                </header>
+    // formArea.innerHTML = `
 
-                <form class="form">
-
-                    <div class="plan-select-field">
-                        <div>
-                            <input type="radio" id="arcade" class="check-plan" name="plan" value="arcade">
-                            <label for="arcade">
-                                <div class="plan-card">
-                                    <div class="plan-img-container">
-                                        <img src="./assets/images/icon-arcade.svg" alt="arcade">
-                                    </div>
-                                    <div class="plan-details">
-                                        <span class="plan-name">
-                                            Arcade
-                                        </span>
-                                        <br>
-                                        <span class="plan-price">
-                                            $<span id="arcade-price">${prices.plans.monthly.arcade}</span>/<span class="per-year-month">mo</span>
-                                        </span>
-                                        <br>
-                                        <span class="yearly-2month-offer">
-                                            2 months free
-                                        </span>
-                                    </div>
-
-                                </div>
-                            </label>
-                        </div>
-                        <br>
-                        <div>
-                            <input type="radio" id="advanced" class="check-plan" name="plan" value="advanced">
-                            <label for="advanced">
-                                <div class="plan-card">
-                                    <div class="plan-img-container">
-                                        <img src="./assets/images/icon-advanced.svg" alt="arcade">
-                                    </div>
-                                    <div class="plan-details">
-                                        <span class="plan-name">
-                                            Advanced
-                                        </span>
-                                        <br>
-                                        <span class="plan-price">
-                                            $<span id="advanced-price">${prices.plans.monthly.advanced}</span>/<span class="per-year-month">mo</span>
-                                        </span>
-                                        <br>
-                                        <span class="yearly-2month-offer">
-                                            2 months free
-                                        </span>
-                                    </div>
-
-                                </div>
-                            </label>
-                        </div>
-                        <br>
-                        <div>
-                            <input type="radio" id="pro" class="check-plan" name="plan" value="pro">
-                            <label for="pro">
-                                <div class="plan-card">
-                                    <div class="plan-img-container">
-                                        <img src="./assets/images/icon-pro.svg" alt="arcade">
-                                    </div>
-                                    <div class="plan-details">
-                                        <span class="plan-name">
-                                            Pro
-                                        </span>
-                                        <br>
-                                        <span class="plan-price">
-                                            $<span  id="pro-price">${prices.plans.monthly.pro}</span>/<span class="per-year-month">mo</span>
-                                        </span>
-                                        <br>
-                                        <span class="yearly-2month-offer">
-                                            2 months free
-                                        </span>
-                                    </div>
-
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="plan-duration-field">
-                        <div class="duration-selection">
-                            <div class="monthly slided">
-                                Monthly
-                            </div>
-                            <div class="slidearea">
-                                <label class="switch">
-                                    <input type="checkbox" id="slider">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <div class="yearly ">
-                                Yearly
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="btn-holder">
-                <div class="internal-btn-holder">
-                    <div class="goback-btn" id="goback-step2">
-                        Go Back
-                    </div>
-                    <button class="next-step-btn" id="next-btn-step2">
-                        Next Step
-                    </button>
-                </div>
-            </div>
-    `
+    // `
 
     highlightStep(2);
 
+    // listening goback btn at step 2;
     const gobackBtn = document.getElementById('goback-step2');
+
     gobackBtn.addEventListener('click', (e) => {
         step1();
     })
 
+    // listening to year month slider  and changing dom and master object accordingly
     let slider = document.getElementById('slider');
 
     if (masterObject.planDuration == "monthly") {
         slider.checked = false;
         planMonthly();
-    }
-    else {
+    } else {
         slider.checked = true;
         planYearly();
     }
@@ -625,6 +530,7 @@ function step2() {
         }
     })
 
+    // checking for default checked plans
     if (masterObject.planPrice === prices.plans.monthly.pro || masterObject.planPrice === prices.plans.yearly.pro) {
         let Card = document.getElementById('pro');
 
@@ -644,91 +550,41 @@ function step2() {
         Card.nextElementSibling.firstElementChild.classList.add('add-border-plan-card');
     }
 
-
-    // document.get
-
+    // adding click on plan cards
     let planCards = Array.from(document.getElementsByClassName("check-plan"));
     planCards.forEach(element => {
         element.addEventListener('click', (e) => {
+            // marking checkbox and adding border to target
             removeBorderPlan();
+            e.target.checked = true;
+            e.target.nextElementSibling.firstElementChild.classList.add('add-border-plan-card');
+
+            // updating masterObject simultaniously
             const price = e.target.getAttribute('data-price');
             const duration = document.getElementsByClassName('yearly-2month-offer')[0].getAttribute('data-duration');
             masterObject.planDuration = duration;
             masterObject.planPrice = parseInt(price);
-            console.log(masterObject);
-            e.target.checked = true;
-            e.target.nextElementSibling.firstElementChild.classList.add('add-border-plan-card');
+
         })
     });
 
+    // listening to next step btn
     const nextBtnStep2 = document.getElementById('next-btn-step2');
     nextBtnStep2.addEventListener('click', (e) => {
-        const plans = Array.from(document.getElementsByName('plan'));
-        const selectedPlan = plans.filter((elem) => {
-            return elem.checked
-        })
-        const price = selectedPlan[0].getAttribute('data-price');
-        const duration = document.getElementsByClassName('yearly-2month-offer')[0].getAttribute('data-duration')
-
-        masterObject.planDuration = duration;
-        masterObject.planPrice = parseInt(price);
         console.log(masterObject);
         step3();
     })
-
 }
 
 
 
 function step1() {
-    // console.log(formArea);
-    formArea.innerHTML = `
-    <div class="form-container">
-                <header class="form-header">
-                    <h1 class="main-form-heading">
-                        Personal info
-                    </h1>
-                    <p class="form-parah">
-                        Please provide your name, email address, and phone number.
-                    </p>
-                </header>
+    highlightStep(1);
 
-                <form class="form">
-                    <div class="form-fields">
-                        <div class="different-info">
-                            <label class="label" for="name">Name</label>
-                            <input type="text" id="user-name" class="input" id="name" name="name"
-                                placeholder="e.g. Stephen King" required>
+    // hide go back btn
+    document.getElementById('go-back-step1').style.visibility = 'hidden';
 
-                        </div>
-                        <div class="different-info">
-                            <label class="label" for="email">Email Address</label>
-                            <input type="email" id="user-email" class="input" name="email" id="email"
-                                placeholder="e.g. stephenking@lorem.com" required>
-
-                        </div>
-                        <div class="different-info">
-                            <label class="label" for="phone">Phone Number</label>
-                            <input type="text" id="user-phone" class="input" name="phone" id="phone"
-                                placeholder="e.g. +1 234 567 890" phone>
-                        </div>
-                        <div>
-                            <button type="submit" id="submit-step-1" style="display: none;">submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="btn-holder">
-                <div class="internal-btn-holder">
-                    <div class="goback-btn" id='go-back-step1'>
-                        Go Back
-                    </div>
-                    <button class="next-step-btn" id="next-btn-step1">
-                        Next Step
-                    </button>
-                </div>
-            </div>
-    `
+    // check for previously filled values
     if (masterObject.userName !== "") {
         document.getElementById('user-name').value = masterObject.userName;
     }
@@ -739,13 +595,10 @@ function step1() {
         document.getElementById('user-phone').value = masterObject.userNumber;
     }
 
-    document.getElementById('go-back-step1').style.visibility = 'hidden';
-    highlightStep(1);
-
+    // listening next-btn click
     const nextBtn = document.getElementById('next-btn-step1');
 
     nextBtn.addEventListener('click', validation);
-
 }
 
 step1();

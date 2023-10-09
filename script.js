@@ -56,16 +56,31 @@ let masterObject = {
 
 function highlightStep(index) {
     let listOfNumber = Array.from(document.getElementsByClassName('list-number'));
-    listOfNumber.forEach((element, i) => {
-        if (i == index - 1) {
-            element.classList.remove('nonhighlight');
-            element.classList.add('highlight');
-        }
-        else {
-            element.classList.remove('highlight');
-            element.classList.add('nonhighlight');
-        }
-    });
+
+    if (index >= 5) {
+        listOfNumber.forEach((element, i) => {
+            if (i == 3) {
+                element.classList.remove('nonhighlight');
+                element.classList.add('highlight');
+            }
+            else {
+                element.classList.remove('highlight');
+                element.classList.add('nonhighlight');
+            }
+        });
+    }
+    else {
+        listOfNumber.forEach((element, i) => {
+            if (i == index - 1) {
+                element.classList.remove('nonhighlight');
+                element.classList.add('highlight');
+            }
+            else {
+                element.classList.remove('highlight');
+                element.classList.add('nonhighlight');
+            }
+        });
+    }
 
     let listofSteps = Array.from(document.getElementsByClassName('steps'));
 
@@ -224,6 +239,14 @@ function removeBorderPlan() {
     });
 }
 
+function step5() {
+    highlightStep(5);
+    document.getElementsByClassName('thank-u-container')[0].addEventListener('click', (e) => {
+        step4();
+    });
+
+}
+
 
 function step4() {
     highlightStep(4);
@@ -319,7 +342,7 @@ function step4() {
     }
 
     document.getElementById('confirm-btn').addEventListener('click', (e) => {
-        console.log(currentMasterObject);
+        step5();
     })
 
     // setting elements in document

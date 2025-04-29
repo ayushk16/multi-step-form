@@ -1,9 +1,10 @@
 ## Index
 
 - [Overview](#overview)
+  - [Links](#links)
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
-  - [Links](#links)
+  
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
@@ -13,6 +14,11 @@
 - [Contribute](#contributing)
 
 ## Overview
+
+### Links
+
+- GitHub Code URL: [github.com/ayushk16](https://github.com/ayushk16/multi-step-form)
+- Live Site URL: [Vercel App Link](https://multi-step-form-rho-nine.vercel.app)
 
 ### The challenge
 
@@ -46,11 +52,6 @@ Users should be able to:
   ![step3](./assets/screenshots/ssph3.png)
   ![step4](./assets/screenshots/ssph4.png)
   ![step5](./assets/screenshots/ssph5.png)
-
-### Links
-
-- GitHub Code URL: [github.com/ayushk16](https://github.com/ayushk16/multi-step-form)
-- Live Site URL: [Vercel App Link](https://multi-step-form-rho-nine.vercel.app)
 
 ## My process
 
